@@ -1,0 +1,19 @@
+Linux
+Download composer and put it in a global directory 
+https://getcomposer.org/download/
+manualy put it in the directory [usr/local/bin]
+
+Command to Install all of the framework's dependencies.
+(This process requires Git to be installed on the server to successfully complete the installation.)
+$ composer install
+copy or install the vendor folder
+
+change the .env.example file to .env
+show all files and the hidden files
+ls -alh
+copy .env.example and rename it as .env
+cp .env.example .env
+php artisan key:generate
+
+
+
