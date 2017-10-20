@@ -48,24 +48,10 @@
 
 {{ Form::close() }}
 
-{{ Form::open(['url'=> '/import', 'class' => 'form', 'enctype' => 'multipart/form-data']) }}
-{{ Form::label('file', 'Upload Excel xls/csv:') }}
-{{ Form::file('file', ['class' => 'field']) }}
-{{ Form::close() }}
-<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
-    {{ csrf_field() }}
-    Choose your xls/csv File : <input type="file" name="file" class="form-control">
- 
-    <input type="submit" class="btn btn-primary btn-lg" style="margin-top: 3%">
-</form>
-
-</section>
-</div>
+<h3>OR </h3>
 
 <div class="container">
-        <h2 class="text-center">
-             Excel/CSV Import
-        </h2>
+        
  
         @if ( Session::has('success') )
         <div class="alert alert-success alert-dismissible" role="alert">
@@ -98,12 +84,36 @@
 </div>
 @endif
  
+<!-- <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    Choose your xls/csv File : <input type="file" name="file" class="form-control">
+ 
+    <input type="submit" class="btn btn-primary btn-lg" style="margin-top: 2%">
+</form> -->
+<br>
+{{ Form::open(['url'=> '/import', 'class' => 'form', 'enctype' => 'multipart/form-data']) }}
+{{ Form::label('file', 'Upload Excel xls/csv:') }}
+{{ Form::file('file', ['class' => 'field']) }}
+{{ Form::submit('Submit File', ['class'=>'btn btn-primary']) }}
+{{ Form::close() }}
+ 
+</div>
+
+
+<!-- {{ Form::open(['url'=> '/import', 'class' => 'form', 'enctype' => 'multipart/form-data']) }}
+{{ Form::label('file', 'Upload Excel xls/csv:') }}
+{{ Form::file('file', ['class' => 'field']) }}
+{{ Form::submit('Submit', ['class'=>'btn btn-primary']) }}
+{{ Form::close() }}
 <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
     Choose your xls/csv File : <input type="file" name="file" class="form-control">
  
     <input type="submit" class="btn btn-primary btn-lg" style="margin-top: 3%">
 </form>
- 
+ -->
+</section>
 </div>
+
+
  @stop

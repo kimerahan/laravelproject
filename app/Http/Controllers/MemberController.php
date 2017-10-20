@@ -6,12 +6,11 @@ use App\MemberModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use Maatwebsite\Excel\Facades\Excel;
+//use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Session;
-use Excel;
 use File;
-
+use Excel;
 class MemberController extends Controller
 {
     public function index(){
@@ -42,7 +41,7 @@ class MemberController extends Controller
         return Redirect::action('MemberController@index');
 
     }
-public function postUploadCsv()
+/*public function postUploadCsv()
 {
     $rules = array(
         'file' => 'required',
@@ -71,7 +70,7 @@ public function postUploadCsv()
             return Redirect::action('MemberController@index');
         }
     } 
-} 
+} */
     public function show($id)
     {
         $members = MemberModel::find($id);
@@ -121,16 +120,22 @@ public function postUploadCsv()
                 $data = Excel::load($path, function($reader) {
                 })->get();
                 if(!empty($data) && $data->count()){
- 
-                    foreach ($data as $key => $value) {
-                        $insert[] = [
-                        'name' => $value->name,
-                        'phone' => $value->phone,
-                        'email' => $value->email,
-                        'occupation' => $value->occupation,
-                        'age' => $value->age,
-                        'sex' => $value->sex,                      
+                       
+                       
+                         foreach ($data as $key => $value) {
+                         	
+                         	foreach ($value as $key => $values) {
+                         		//dd($values->toArray());
+                         		$insert[] = [
+                        		'name' => $values->name,
+		                        'phone' => $values->phone,
+		                        'email' => $values->email,
+		                        'occupation' => $values->occupation,
+		                        'age' => $values->age,
+		                        'sex' => $values->sex,                      
                         ];
+                         	}
+                        
                     }
  
                     if(!empty($insert)){
@@ -138,6 +143,8 @@ public function postUploadCsv()
                         $insertData = DB::table('churchmembers')->insert($insert);
                         if ($insertData) {
                             Session::flash('success', 'Your Data has successfully imported');
+                            return Redirect::action('MemberController@index');
+                            
                         }else {                        
                             Session::flash('error', 'Error inserting the data..');
                             return back();
@@ -152,5 +159,7 @@ public function postUploadCsv()
                 return back();
             }
         }
+    
+
     }
 }
