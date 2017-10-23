@@ -13,12 +13,11 @@
 <table class="table">
 <thead>
 <tr>
-<th>{{ Form::label('name', 'Name:') }}</th>
-<th>{{ Form::label('phone', 'Phone:') }}</th>
-<th>{{ Form::label('email', 'Email:') }}</th>
-<th>{{ Form::label('occupation', 'Occupation:') }}</th>
-<th>{{ Form::label('age', 'Age:') }}</th>
-<th>{{ Form::label('sex', 'Sex:') }}</th>
+<th>{{ Form::label('name', '#:') }}</th>
+<th>{{ Form::label('phone', 'Title:') }}</th>
+<th>{{ Form::label('email', 'Body:') }}</th>
+<th>{{ Form::label('occupation', 'Image:') }}</th>
+<th>{{ Form::label('done', 'Finish:') }}</th>
 </tr>
 </thead>
 <tbody>

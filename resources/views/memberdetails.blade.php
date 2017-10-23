@@ -11,9 +11,25 @@
 </section>
 
 <div class="container">
+<div class="pull-right">
+	<form action="/search" method="POST" role="search">
+    {{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="q"
+            placeholder="Search Members"> <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+</form>
+</div>
+
 <section class="section-padding">
 <div class="jumbotron text-center">
 <!-- <h4>Enter Member Details</h4> -->
+
+
 
 {{ Form::open(['url'=> '/memberdetails', 'class' => 'form', 'enctype' => 'multipart/form-data']) }}
 @if ($members->isEmpty())
@@ -22,6 +38,7 @@
 <table class="table">
 <thead>
 <tr>
+<th>{{ Form::label('#', '#:') }}</th>
 <th>{{ Form::label('name', 'Name:') }}</th>
 <th>{{ Form::label('phone', 'Phone:') }}</th>
 <th>{{ Form::label('email', 'Email:') }}</th>
@@ -33,6 +50,7 @@
 <tbody>
 @foreach($members as $members)
 <tr>
+<td>{{ $members->id }}</td>
 <td><a href="{{ action('MemberController@show', $members->id) }}">{{ $members->name }}</td>
 <td>{{ $members->phone }}</td>
 <td>{{ $members->email }}</td> 

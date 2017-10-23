@@ -1,21 +1,10 @@
 @extends('layouts.app')
 @section('content')
-<section class="header section-padding">
-<div class="background">&nbsp;</div>
-<div class="container">
-<div class="header-text">
-<h1>Create</h1>
-<p>
-Create tasks page
-</p>
-</div>
-</div>
-</section>
 
 <div class="container">
 <section class="section-padding">
 <div class="jumbotron text-center">
-<h1>Create A Task</h1>
+<h4>Create Task Content</h4>
 
 {{ Form::open(['url'=> '/create', 'class' => 'form', 'enctype' => 'multipart/form-data']) }}
 <div>

@@ -4,16 +4,15 @@
 <div class="container">
 <section class="section-padding">
 <div class="jumbotron text-center">
-<h4>Edit Member {{ $members->name }}</h4>
+<h4>Delete Member {{ $members->name }}</h4>
 
 <!-- {{ Form::open(['url'=> '/editmember', 'class' => 'form', 'enctype' => 'multipart/form-data']) }} -->
-{{ Form::open(['url'=> '/editmember', 'class'=>'form']) }}
+{{ Form::open(['url'=> '/deletemember', 'class'=>'form']) }}
  <input type="hidden" name="_method" value="POST" /> 
  {{ Form::hidden('id', $members->id)}}
 <table class="table">
 <thead>
 <tr>
-<th>{{ Form::label('#', '#:') }}</th>
 <th>{{ Form::label('name', 'Name:') }}</th>
 <th>{{ Form::label('phone', 'Phone:') }}</th>
 <th>{{ Form::label('email', 'Email:') }}</th>
@@ -25,16 +24,16 @@
 <tbody>
 
 <tr>
-<td>{{ $members->id }}</td>
-<td>{{ Form::text('name', $members->id , ['class'=>'form-control']) }} </td>
-<td>{{ Form::text('name', $members->name , ['class'=>'form-control']) }} </td>
-<td> {{ Form::text('phone',  $members->phone , ['class'=>'form-control']) }}</td>
-<td> {{ Form::text('email',  $members->email , ['class'=>'form-control']) }}</td> 
-<td> {{ Form::text('occupation',  $members->occupation , ['class'=>'form-control']) }}</td>
-<td>{{ Form::text('age',  $members->age , ['class'=>'form-control']) }} </td>
-<td> {{ Form::text('sex',  $members->sex , ['class'=>'form-control']) }}</td>
+<td>{{ $members->name }}</td>
+<td>{{ $members->phone }}</td>
+<td>{{ $members->email }}</td> 
+<td>{{ $members->occupation }}</td>
+<td>{{ $members->age }}</td>
+<td>{{ $members->sex }}</td>
 <td> <div class="form-group">
-{{ Form::submit('Save Member', ['class'=>'btn btn-primary']) }}
+{{ Form::submit('Delete Member', ['class' => 'btn btn-primary']) }}
+<a href="{{ action('MemberController@index') }}"
+class="btn btn-danger"> No </a>
 </div>
 {{ Form::close() }}
 

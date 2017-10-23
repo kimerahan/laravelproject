@@ -22,10 +22,7 @@ Welcome {{ Auth::user()->name }}
 <section class="section-padding">
 <div class="jumbotron text-center">
 <div class="panel panel-default">
-<div class="panel-heading">
 
-</h3>
-</div>
 @if ($tasks->isEmpty())
 <p> Currently, there is no task!</p>
 @else
@@ -38,7 +35,7 @@ Welcome {{ Auth::user()->name }}
 <th>Image</th>
 <!-- <th>Audio</th> -->
 <th>Finish</th>
-<th>Control</th>
+<<!-- th>Control</th> -->
 </tr>
 </thead>
 <tbody>
@@ -53,12 +50,8 @@ Welcome {{ Auth::user()->name }}
 <td>{{ $task->body}}</td>
 <td><img src='{{ asset('uploads'.'/'.$task->image) }}' height =100px width = 100px /></td>
 <td>{{ $task->done ? 'Yes' : 'No'}}</td>
-<td>
-<a href="{{ action('TaskController@edit',
-$task->id) }}" class="btn">Edit</a>
-<a href="{{ action('TaskController@delete',
-$task->id) }}" class="btn">Delete</a>
-</td>
+
+
 </tr>
 @endforeach
 </tbody>
@@ -67,8 +60,15 @@ $task->id) }}" class="btn">Delete</a>
 </div>
 </div>
 </section>
+<a href="{{ action('TaskController@create') }}" class="btn btn-primary">Create Devotional</a>
 </div>
 
  @stop
 
-                   
+<!-- <td></td> -->
+<!-- <a href="{{ action('TaskController@edit',
+$task->id) }}" class="btn">Edit</a>
+<a href="{{ action('TaskController@delete',
+$task->id) }}" class="btn">Delete</a>
+
+                  -->

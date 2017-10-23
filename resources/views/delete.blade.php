@@ -27,6 +27,7 @@ Delete tasks page
 <th>#</th>
 <th>Title</th>
 <th>Body</th>
+<th>Image</th>
 <th>Finish</th>
 </tr>
 </thead>
@@ -38,15 +39,10 @@ Delete tasks page
 <td><img src='{{ asset('uploads'.'/'.$task->image) }}' height =100px width = 100px /></td>
 <td>{{ $task->done ? 'Yes' : 'No'}}</td>
 <td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<!-- <h1>Do you want to delete Task {{ $task->id }}? </h1> -->
-
 {{ Form::open(['url'=> '/delete', 'class'=>'form']) }}
+ <input type="hidden" name="_method" value="POST" /> 
+ {{ Form::hidden('id', $task->id)}}
+               
 <!-- {{ Form::hidden('id', $task->id)}}
  -->
 <div class="form-group">
@@ -56,6 +52,14 @@ class="btn btn-danger"> No </a>
 </div>
 
 {{ Form::close() }} 
+</td>
+</tr>
+</tbody>
+</table>
+
+<!-- <h1>Do you want to delete Task {{ $task->id }}? </h1> -->
+
+
 </div>
 </section>
 </div>

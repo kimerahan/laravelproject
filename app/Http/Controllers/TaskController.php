@@ -93,16 +93,27 @@ class TaskController extends Controller
     public function delete(Task $task)
     {
         //return View::make('delete', compact('task'));
+        //$task = Task::findOrFail($id);
         return View('delete')->with('task', $task);
     }
     public function doDelete()
     {
        $task = Task::findOrFail(Input::get('id'));
+       //$task = Task::findOrFail($id);
        /* $task = Task::findOrFail(Input::get($id));*/
         $task->delete();
         return Redirect::action('TaskController@home');
 
     }
+
+   public function destroy($id)
+    {
+    $task = Task::findOrFail($id);
+    $task->delete();
+
+    return Redirect::route('tasks.home');
+    }
+
     public function show($id)
     {
         $task = Task::find($id);

@@ -26,6 +26,9 @@ class MemberController extends Controller
       //return view('memberdetails')->with('members', $members);
       return view('createmember');
   }
+  public function search(){
+      return view('search');
+  }
 
   public function saveCreate(Request $request)
     {
@@ -81,7 +84,7 @@ class MemberController extends Controller
 
     }
 
-    public function edit(Request $request, $id)
+    public function editmember(Request $request, $id)
     {
         //return View::make('edit', compact('task'));
         $members = MemberModel::findOrFail($id);
@@ -105,6 +108,20 @@ class MemberController extends Controller
         return Redirect::action('MemberController@index');
     }
 
+    public function delete(MemberModel $member)
+    {
+      
+        return View('deletemember')->with('members', $member);
+    }
+ public function doDelete()
+    {
+       $members = MemberModel::findOrFail(Input::get('id'));
+       //$task = Task::findOrFail($id);
+       /* $task = Task::findOrFail(Input::get($id));*/
+        $members->delete();
+        return Redirect::action('MemberController@index');
+
+    }
 
     public function import(Request $request){
         //validate the xls file

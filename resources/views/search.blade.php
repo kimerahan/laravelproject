@@ -1,15 +1,25 @@
 @extends('layouts.app')
-
 @section('content')
+<section class="header section-padding">
+<div class="background">&nbsp;</div>
+<div class="container">
+<div class="header-text">
+<h1>Member Details</h1>
+
+
+</div>
+</div>
+</section>
 
 <div class="container">
 <section class="section-padding">
 <div class="jumbotron text-center">
-<div class="panel panel-default">
-<div class="panel-heading">
-<h3><span class="grey">Mr/Mrs </span> {{ $members->name }}
-</h3>
-</div>
+<!-- <h4>Enter Member Details</h4> -->
+
+{{ Form::open(['url'=> '/memberdetails', 'class' => 'form', 'enctype' => 'multipart/form-data']) }}
+@if (isset($details))
+<p> The Search results for your query <b> {{ $query }} </b> are :</p>
+
 <table class="table">
 <thead>
 <tr>
@@ -23,6 +33,7 @@
 </tr>
 </thead>
 <tbody>
+@foreach($details as $members)
 <tr>
 <td>{{ $members->id }}</td>
 <td>{{ $members->name }}</td>
@@ -32,23 +43,14 @@
 <td>{{ $members->age }}</td>
 <td>{{ $members->sex }}</td>
 
-<td>
-<a href="{{ action('MemberController@editmember',
-$members->id) }}" class="btn">Edit</a> 
-
-</td>
-<td>
-<a href="{{ action('MemberController@delete',
-$members->id) }}" class="btn">Delete</a> 
-
-</td>
 </tr>
+@endforeach
 </tbody>
 </table>
+@endif
 </div>
-</div>
+<a href="{{ action('MemberController@index') }}" class="btn btn-primary">Back</a>
+
 </section>
 </div>
-
-@stop
-
+ @stop

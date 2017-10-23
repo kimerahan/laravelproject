@@ -14,6 +14,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\MemberModel;
+use Illuminate\Support\Facades\Input;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +35,7 @@ Route::get('/edit','TaskController@edit');
 //Route::get('/delete','TaskController@delete');
 Route::get('/edit/{id}','TaskController@edit');
 Route::post('/edit', 'TaskController@doEdit');
+//Route::get('/delete/{id}','TaskController@delete');
 Route::get('/delete/{task}','TaskController@delete');
 Route::post('/delete', 'TaskController@doDelete');
 //Route::get('/delete','TaskController@delete');
@@ -163,14 +166,28 @@ return Response::json(array(
 
 Route::post('import', 'MemberController@import')->name('import');
 Route::get('/memberdetails','MemberController@index');
+
+Route::any ( '/search', function () {
+    $q = Input::get ( 'q' );
+    $members = MemberModel::where ( 'name', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->orWhere ( 'occupation', 'LIKE', '%' . $q . '%' )->orWhere ( 'age', 'LIKE', '%' . $q . '%' )->orWhere ( 'sex', 'LIKE', '%' . $q . '%' )->get ();
+    if (count ( $members ) > 0)
+        return view ( 'search' )->withDetails ( $members )->withQuery ( $q );
+    else
+        return view ( 'search' )->withMessage ( 'No Details found. Try to search again !' );
+} );
+
 Route::get('/createmember','MemberController@createmember');
 Route::post('/createmember', 'MemberController@saveCreate');
 //Route::post('/createmember', 'MemberController@postUploadCsv');
 Route::get('member/{id}', 'MemberController@show')->where('id', '\d+');
 
-Route::get('/editmember','MemberController@edit');
-Route::get('/editmember/{id}','MemberController@edit');
+Route::get('/editmember','MemberController@editmember');
+Route::get('/editmember/{id}','MemberController@editmember');
 Route::post('/editmember', 'MemberController@doEdit');
+Route::resource('tasks', 'TaskController');
+
+Route::get('/deletemember/{member}','MemberController@delete');
+Route::post('/deletemember', 'MemberController@doDelete');
 
 Route::get('/api/v1/members/{id?}', ['middleware' => 'auth.basic', function($id = null) {
 if ($id == null) {
